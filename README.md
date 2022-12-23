@@ -5,9 +5,10 @@ For this assignment, I created several long strings of all possible characters t
 
 
 ### Screenshot link
-!
+![screenshot of deployed]https://github.com/codelearning2021/Nate-Johnson-s-randompassword-generator/blob/main/generated%20password.png
 
 Relative Link: 
+(Nate-Johnson-s-randompassword-generator/blob/main/generated%20password.png)
 
 ### Link to deployed website
 
