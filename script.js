@@ -6,7 +6,7 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword(passwordLength);
+  var password = generatePassword(rndInt);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -16,21 +16,18 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// Determine length of password between 12-16
-var passRange = [12, 13, 14, 15, 16];
-
-var randomLength = Math.floor(Math.random() * passRange.length);
-
-var passwordLength = passRange[randomLength]
-
+// lowercase characters
 var lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
 // converts lowercase letters to uppercase
 var uppercaseLetters = lowercaseLetters.toUpperCase();
 
+// string for all numbers
+var allNumbers = '0123456789';
+
 // string for adding special characters
 var specialCharacters = '~`!@#$%^&*()_-+={[}]|\:;"<,>.?/';
 
-var possibleCharacters = lowercaseLetters.concat(uppercaseLetters, specialCharacters);
+var possibleCharacters = lowercaseLetters.concat(uppercaseLetters, specialCharacters, allNumbers);
 
 // develop function for choosing random password
 function generatePassword(length) {
@@ -43,5 +40,13 @@ function generatePassword(length) {
   return result;
 }
 
+// Random number between 8 and 128
+function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
 
+var rndInt = randomIntFromInterval(8, 128)
+
+console.log(rndInt)
+console.log(generatePassword(rndInt))
 
