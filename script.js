@@ -4,6 +4,13 @@
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
+var upperCaseAsk;
+var numbersAsk;
+var specCharAsk;
+var passwordLengthAsk;
+var possibleCharacters;
+var charactersLength;
+
 // Write password to the #password input
 function writePassword() {
   userSelections();
@@ -26,14 +33,6 @@ var allNumbers = '0123456789';
 // string for adding special characters
 var specialCharacters = '~`!@#$%^&*()_-+={[}]|\:;"<,>.?/';
 
-var upperCaseAsk;
-var numbersAsk;
-var specCharAsk;
-var passwordLengthAsk;
-var possibleCharacters;
-var charactersLength;
-
-
 // prompts that ask the user fo their selections
 function userSelections() {
   var upperCaseAsk = confirm("Do you want to use uppercase letters?");
@@ -51,34 +50,6 @@ function userSelections() {
   }
 }
 
-// Selections which arrays to pull from based on user inputs
-function runPossibleCharacters(possibleCharacters) {
-  if (upperCaseAsk === true && numbersAsk === true && specCharAsk === true) {
-    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters, specialCharacters, allNumbers);
-  }
-  if (upperCaseAsk === true && numbersAsk === true && specCharAsk === false) {
-    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters, allNumbers);
-  }
-  if (upperCaseAsk === true && numbersAsk === false && specCharAsk === false) {
-    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters);
-  }
-  if (upperCaseAsk === false && numbersAsk === false && specCharAsk === false) {
-    return possibleCharacters = lowercaseLetters;
-  }
-  if (upperCaseAsk === false && numbersAsk === false && specCharAsk === true) {
-    return possibleCharacters = lowercaseLetters.concat(specialCharacters);
-  }
-  if (upperCaseAsk === false && numbersAsk === true && specCharAsk === true) {
-    return possibleCharacters = lowercaseLetters.concat(allNumbers, specialCharacters);
-  }
-  if (upperCaseAsk === false && numbersAsk === true && specCharAsk === false) {
-    return possibleCharacters = lowercaseLetters.concat(allNumbers);
-  }
-  if (upperCaseAsk === true && numbersAsk === false && specCharAsk === true) {
-    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters, specialCharacters);
-  }
-}
-
 // develop function for choosing random characters in array
 function generatePassword(length) {
   var result = ' ';
@@ -87,6 +58,34 @@ function generatePassword(length) {
     result += runPossibleCharacters.charAt(Math.floor(Math.random() * charactersLength));
 
   }
-  console.log(charactersLength)
+  console.log(runPossibleCharacters)
   return result;
+}
+
+// Selections which arrays to pull from based on user inputs
+function runPossibleCharacters(possibleCharacters) {
+  if (upperCaseAsk === true && numbersAsk === true && specCharAsk === true) {
+    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters, specialCharacters, allNumbers);
+  }
+  else if (upperCaseAsk === true && numbersAsk === true && specCharAsk === false) {
+    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters, allNumbers);
+  }
+  else if (upperCaseAsk === true && numbersAsk === false && specCharAsk === false) {
+    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters);
+  }
+  else if (upperCaseAsk === false && numbersAsk === false && specCharAsk === false) {
+    return possibleCharacters = lowercaseLetters;
+  }
+  else if (upperCaseAsk === false && numbersAsk === false && specCharAsk === true) {
+    return possibleCharacters = lowercaseLetters.concat(specialCharacters);
+  }
+  if (upperCaseAsk === false && numbersAsk === true && specCharAsk === true) {
+    return possibleCharacters = lowercaseLetters.concat(allNumbers, specialCharacters);
+  }
+  else if (upperCaseAsk === false && numbersAsk === true && specCharAsk === false) {
+    return possibleCharacters = lowercaseLetters.concat(allNumbers);
+  }
+  else if (upperCaseAsk === true && numbersAsk === false && specCharAsk === true) {
+    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters, specialCharacters);
+  }
 }
