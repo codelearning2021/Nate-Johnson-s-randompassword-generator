@@ -13,10 +13,9 @@ var charactersLength;
 
 // Write password to the #password input
 function writePassword() {
-  userSelections();
+  var passwordLengthAsk = userSelections();
   var password = generatePassword(passwordLengthAsk);
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 
 }
@@ -35,10 +34,10 @@ var specialCharacters = '~`!@#$%^&*()_-+={[}]|\:;"<,>.?/';
 
 // prompts that ask the user fo their selections
 function userSelections() {
-  var upperCaseAsk = confirm("Do you want to use uppercase letters?");
-  var numbersAsk = confirm("Do you want to use numbers?");
-  var specCharAsk = confirm("Do you want to use special characters?");
-  var passwordLengthAsk = prompt("Pick a number between 8 and 128 for your password length");
+  upperCaseAsk = confirm("Do you want to use uppercase letters?");
+  numbersAsk = confirm("Do you want to use numbers?");
+  specCharAsk = confirm("Do you want to use special characters?");
+  passwordLengthAsk = prompt("Pick a number between 8 and 128 for your password length");
   // validate number selection from user
   if (isNaN(passwordLengthAsk)
     || passwordLengthAsk < 8
@@ -47,6 +46,7 @@ function userSelections() {
   }
   else {
     console.log(upperCaseAsk, numbersAsk, specCharAsk, passwordLengthAsk);
+    return passwordLengthAsk;
   }
 }
 
@@ -55,37 +55,34 @@ function generatePassword(length) {
   var result = ' ';
   var charactersLength = runPossibleCharacters();
   for (let i = 0; i < length; i++) {
-    result += runPossibleCharacters.charAt(Math.floor(Math.random() * charactersLength));
-
+    var characters = runPossibleCharacters();
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
-  console.log(runPossibleCharacters)
+  console.log(charactersLength)
   return result;
 }
 
 // Selections which arrays to pull from based on user inputs
-function runPossibleCharacters(possibleCharacters) {
+function runPossibleCharacters() {
+  var possibleCharacters = ""
   if (upperCaseAsk === true && numbersAsk === true && specCharAsk === true) {
-    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters, specialCharacters, allNumbers);
+    possibleCharacters = lowercaseLetters.concat(uppercaseLetters, specialCharacters, allNumbers);
+  } else if (upperCaseAsk === true && numbersAsk === true && specCharAsk === false) {
+    possibleCharacters = lowercaseLetters.concat(uppercaseLetters, allNumbers);
+  } else if (upperCaseAsk === true && numbersAsk === false && specCharAsk === false) {
+    possibleCharacters = lowercaseLetters.concat(uppercaseLetters);
+  } else if (upperCaseAsk === false && numbersAsk === false && specCharAsk === false) {
+    possibleCharacters = lowercaseLetters;
+  } else if (upperCaseAsk === false && numbersAsk === false && specCharAsk === true) {
+    possibleCharacters = lowercaseLetters.concat(specialCharacters);
+  } else if (upperCaseAsk === false && numbersAsk === true && specCharAsk === true) {
+    possibleCharacters = lowercaseLetters.concat(allNumbers, specialCharacters);
+  } else if (upperCaseAsk === false && numbersAsk === true && specCharAsk === false) {
+    possibleCharacters = lowercaseLetters.concat(allNumbers);
+  } else if (upperCaseAsk === true && numbersAsk === false && specCharAsk === true) {
+    possibleCharacters = lowercaseLetters.concat(uppercaseLetters, specialCharacters);
   }
-  else if (upperCaseAsk === true && numbersAsk === true && specCharAsk === false) {
-    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters, allNumbers);
-  }
-  else if (upperCaseAsk === true && numbersAsk === false && specCharAsk === false) {
-    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters);
-  }
-  else if (upperCaseAsk === false && numbersAsk === false && specCharAsk === false) {
-    return possibleCharacters = lowercaseLetters;
-  }
-  else if (upperCaseAsk === false && numbersAsk === false && specCharAsk === true) {
-    return possibleCharacters = lowercaseLetters.concat(specialCharacters);
-  }
-  if (upperCaseAsk === false && numbersAsk === true && specCharAsk === true) {
-    return possibleCharacters = lowercaseLetters.concat(allNumbers, specialCharacters);
-  }
-  else if (upperCaseAsk === false && numbersAsk === true && specCharAsk === false) {
-    return possibleCharacters = lowercaseLetters.concat(allNumbers);
-  }
-  else if (upperCaseAsk === true && numbersAsk === false && specCharAsk === true) {
-    return possibleCharacters = lowercaseLetters.concat(uppercaseLetters, specialCharacters);
-  }
+  console.log(possibleCharacters);
+  return possibleCharacters;
 }
+
