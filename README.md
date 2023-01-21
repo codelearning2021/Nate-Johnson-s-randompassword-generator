@@ -1,7 +1,7 @@
 # Module-3-Challenge-Nate-Johnson
 
 ## Description
-For this assignment, I created several long strings of all possible characters to use in a password then concatenated them together to be able to pull characters from randomly. I also created a variable length of password between 8 - 128 characters.
+For this assignment, I created several long strings of all possible characters to use in a password then concatenated them together to be able to pull characters from randomly. The user is prompted for which type of characters they will want to use. I also created a variable length of password between 8 - 128 characters based on user input (with validation).
 
 
 ### Screenshot link
